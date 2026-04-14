@@ -1,9 +1,6 @@
 name: build and upload MuffinStore
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       tagname:
