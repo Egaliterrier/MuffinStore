@@ -51,6 +51,6 @@ jobs:
           TAGNAME: ${{ inputs.tagname }}
           RELEASENAME: ${{ inputs.releasename }}
         with:
-          tag_name: v${{ env.TAGNAME }}
-          name: v${{ env.RELEASENAME }}
+          tag_name: ${{ env.TAGNAME }}
+          name: ${{ env.RELEASENAME }}
           files: ./output/*.ipa
