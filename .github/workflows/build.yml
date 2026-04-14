@@ -5,7 +5,18 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+    inputs:
+      tagname:
+        description: "Tag used for release"
+        default: "Experimental"
+        required: true
+        type: string
+      releasename:
+        description: "Name used for release"
+        default: "1.1-1"
+        required: true
+        type: string
+  
 jobs:
   build:
     runs-on: macos-15
@@ -33,3 +44,13 @@ jobs:
         with:
           name: MuffinStore IPA
           path: ./output/*.ipa
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2.5.0
+        env:
+          TAGNAME: ${{ inputs.tagname }}
+          RELEASENAME: ${{ inputs.releasename }}
+        with:
+          tag_name: v${{ env.TAGNAME }}
+          name: v${{ env.RELEASENAME }}
+          files: ./output/*.ipa
